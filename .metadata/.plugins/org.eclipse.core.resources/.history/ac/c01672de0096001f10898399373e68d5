@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@page import="model.dto.ShowDto" %>
+<%@page import="java.util.List" %>
+    
+<% 
+	List<ShowDto> showDtos = (List<ShowDto>)request.getAttribute("showDtos");
+%>    
+    
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Show</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+		<link rel="stylesheet" href="css/buttons.css">
+	</head>
+	
+	<body>
+		<form class="pure-form" method="post" action="/show/add">
+			<fieldset>
+				<legend>Show 新增</legend>
+				節目名稱:　<input type="text" name="showname" placeholder="請輸入showname" required><p />
+				節目日期:　<input type="date" name="showtime" required><p />
+				人數限制:　<input type="text" name="limitpeople" required><p />
+				<div class="textarea">
+					內容簡介:　<input name="showintro" required><p />
+				</div>
+			
+			
+			</fieldset>
+		</form>
+		<p />
+		<div class="pure-form">
+			<fieldset>
+				<legend>Show 列表</legend>
+				<table>
+				
+				
+				
+				</table>
+			
+			</fieldset>
+		</div>
+	
+	</body>
+</html>

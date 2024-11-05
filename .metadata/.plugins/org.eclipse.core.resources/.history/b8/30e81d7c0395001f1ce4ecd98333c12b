@@ -1,0 +1,38 @@
+<%@page import="javaweb.model.dto.ProductDto"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%
+	// 得到 UserServlet 所傳來的資料
+	List<ProductDto> productDtos = (List<ProductDto>)request.getAttribute("productDtos");
+%>    
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Product</title>
+	</head>
+	<body>
+		<div>
+			<fieldset>
+				<legend>Product 列表</legend>
+				<table border="1">
+					<thead>
+						<tr>
+							<th>ID</th><th>產品名稱</th><th>價格</th><th>庫存量</th>
+						</tr>
+					</thead>
+					<% for(ProductDto productDto : productDtos) { %>
+						<tr>
+							<td><%=productDto.getProductId() %></td>
+							<td><%=productDto.getProductname() %></td>
+							<td><%=productDto.getPrice() %></td>
+							<td><%=productDto.getStockquantity()) %></td>
+						</tr>
+					<% } %>
+				</table>
+			</fieldset>
+		</div>
+	</body>
+</html>

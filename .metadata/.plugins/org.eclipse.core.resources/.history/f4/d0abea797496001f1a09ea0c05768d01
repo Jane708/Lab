@@ -1,0 +1,14 @@
+package exception;
+
+public class UserNotFoundException extends CerException{
+
+	public UserNotFoundException() {
+		super("查無此人! ");
+		
+	}
+	
+	public UserNotFoundException(String message) {
+		super(message);
+	}
+	
+}

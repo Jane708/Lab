@@ -1,0 +1,19 @@
+package javaweb.service;
+
+import javaweb.model.dto.UserCert;
+import javaweb.repository.UserDao;
+
+// 憑證服務
+public class CertService {
+	private UserDao userDao = new UserDao();
+	
+	// 登入成功後，可以取得憑證
+	public UserCert getCert(String username, String password) {
+		// 1. 先確認是否有此人
+		
+		
+		
+		return null;
+	}
+
+}

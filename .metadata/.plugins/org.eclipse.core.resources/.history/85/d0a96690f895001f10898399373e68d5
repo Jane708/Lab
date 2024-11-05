@@ -1,0 +1,22 @@
+package service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.dto.ShowDto;
+import repository.ShowDao;
+import repository.ShowDaoImpl;
+
+public class ShowService {
+	
+	private ShowDao showDao = new ShowDaoImpl();
+	
+	//所有使用者
+	public List<ShowDto> findAll(){
+		List<ShowDto> showDtos = new ArrayList<>();
+		
+		
+		return null;
+	}
+
+}

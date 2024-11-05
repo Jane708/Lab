@@ -1,0 +1,15 @@
+package service;
+
+import repository.ShowDao;
+import repository.ShowDaoImpl;
+
+public class ShowService {
+	
+	private ShowDao showDao = new ShowDaoImpl();
+	
+	//所有使用者
+	public List<ShowDto> findAll(){
+		
+	}
+
+}

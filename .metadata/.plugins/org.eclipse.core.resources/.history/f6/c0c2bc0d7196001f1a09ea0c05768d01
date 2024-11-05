@@ -1,0 +1,7 @@
+package javaweb.model.dto;
+
+// 使用者憑證，登入後會取得的資料
+
+public class UserCert {
+
+}

@@ -1,0 +1,10 @@
+package javaweb.filter;
+
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServlet;
+
+
+@WebFilter(urlPatterns = {"/*"}) //設定要過濾/攔截的路徑
+public class LoginFilter extends HttpServlet{
+
+}

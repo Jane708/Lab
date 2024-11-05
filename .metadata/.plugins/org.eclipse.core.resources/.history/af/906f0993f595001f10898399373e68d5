@@ -1,0 +1,13 @@
+package model.dto;
+
+import java.sql.Date;
+
+public class ShowDto {
+	
+	private Integer show_id;
+	private String showname;
+	private Date showtime;
+	private Integer limitpeople;
+	private String showintro;
+
+}

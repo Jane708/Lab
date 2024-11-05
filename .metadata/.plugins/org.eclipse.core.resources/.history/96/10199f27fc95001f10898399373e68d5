@@ -1,0 +1,13 @@
+package servlet;
+
+/*
+ * 查詢全部: Get   /show, /shows
+ * 新增單筆: POST  /show/add
+ * 查詢單筆: GET   /show/get?showname=lovestory
+ * 修改單筆: POST  /show/update?showId=1
+ * 刪除單筆: GET   /show/delete?showId=1
+ */
+
+public class ShowServlet {
+
+}

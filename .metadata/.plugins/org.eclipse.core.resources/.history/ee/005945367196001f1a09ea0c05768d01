@@ -1,0 +1,13 @@
+package javaweb.model.dto;
+
+import lombok.Data;
+
+// 使用者憑證(內容)，登入後會取得的資料
+
+@Data
+public class UserCert {
+	private Integer userId; // 使用者ID
+	private String username; // 使用者名稱
+	private String role; // 角色權限
+
+}

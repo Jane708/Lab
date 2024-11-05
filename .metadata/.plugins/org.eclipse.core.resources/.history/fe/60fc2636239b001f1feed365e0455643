@@ -1,0 +1,15 @@
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class HelloController {
+	
+	public String sayHi() {
+		return "hi";
+	}
+	
+	public String sayYes() {
+		return "Yes";
+	}
+}

@@ -1,0 +1,4 @@
+spring.application.name=springboot-mvc
+server.port=8080
+
+server.servlet.context-path=/mvc

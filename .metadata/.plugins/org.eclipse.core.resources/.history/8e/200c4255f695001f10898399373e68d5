@@ -1,0 +1,5 @@
+package repository;
+
+public class ShowDaoImpl extends BaseDao implements ShowDao {
+
+}

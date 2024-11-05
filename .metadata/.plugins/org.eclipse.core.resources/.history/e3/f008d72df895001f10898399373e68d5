@@ -1,0 +1,9 @@
+package service;
+
+import repository.ShowDao;
+
+public class ShowService {
+	
+	private ShowDao showDao = new ShowDao();
+
+}

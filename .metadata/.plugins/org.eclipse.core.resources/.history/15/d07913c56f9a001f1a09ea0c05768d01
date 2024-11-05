@@ -1,0 +1,13 @@
+package javaweb.model.entity;
+
+import lombok.Data;
+
+@Data
+public class Product {
+	
+	private Integer productId; // 產品ID
+	private String productname; // 產品名稱
+	private String price; 
+	private String stockquantity; 
+
+}

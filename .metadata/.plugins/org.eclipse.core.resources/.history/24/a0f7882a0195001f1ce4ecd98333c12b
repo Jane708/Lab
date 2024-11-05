@@ -1,0 +1,50 @@
+package javaweb.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import javaweb.model.dto.*;
+import javaweb.model.entity.Product;
+import javaweb.model.entity.User;
+import javaweb.repository.*;
+import javaweb.utils.Hash;
+
+
+//(給UserServlet(Controller)使用)
+public class ProductService {
+	
+	private ProductDao productDao = new ProductDaoImpl();
+	
+	public List<ProductDao> findAll(){
+		List<ProductDao> productDaos = new ArrayList<>();
+		
+		List<Product> products = productDao.findAllProducts();
+		for(Product product : products) {
+			ProductDto productDto = new ProductDto();
+			productDto.setProductId(product.getProductId());
+			productDto.setProductname(product.getProductname());
+			productDto.setPrice(product.getPrice());
+			productDto.setStockquantity(product.getStockquantity());
+			
+			productDaos.add((ProductDao) productDto);
+		}
+		
+		return productDaos;
+	}
+	
+	//新增使用者
+	public void appendProduct(String productname, String price, String email, String role) {
+		
+		//根據上述參數封裝到 User 物件中
+		User user = new User();
+		user.setUsername(username);
+		user.setPasswordHash(passwordHash);
+		user.setSalt(salt);
+		user.setEmail(email);
+		user.setActive(action);
+		user.setRole(role);
+		
+		//存入(新增使用者): 調用 userDao.addUser(user)
+		userDao.addUser(user);
+	}
+	
+}

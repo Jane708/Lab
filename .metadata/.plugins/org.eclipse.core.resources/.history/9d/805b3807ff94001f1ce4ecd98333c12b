@@ -1,0 +1,99 @@
+package javaweb.repository;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javaweb.model.entity.Product;
+import javaweb.model.entity.User;
+
+public class ProductDaoImpl extends BaseDao implements ProductDao{
+
+	@Override
+	public List<Product> findAllUsers() {
+		List<Product> products = new ArrayList<>();
+		String sql = "select product_id, product_name, price, stock_quantity from product";
+		try(Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql)){
+			
+			while(rs.next()) {
+				Product product = new Product();
+				product.setProductId(rs.getInt("product_id"));
+				product.setProductname(rs.getString("product_name"));
+				product.setPrice(rs.getDouble("price"));
+				product.setStockquantity(rs.getInt("stock_quantity"));
+			
+				products.add(product);
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return products;
+	}
+
+	@Override
+	public Product getProduct(String productname) {
+		String sql = "select product_id, product_name, price, stock_quantity from product where productname = ?";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, productname);
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					Product product = new Product();
+					product.setProductId(rs.getInt("product_id"));
+					product.setProductname(rs.getString("product_name"));
+					product.setPrice(rs.getDouble("price"));
+					product.setStockquantity(rs.getInt("stock_quantity"));
+					
+					return product; //返回 product 物件
+				}
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void addProduct(Product product) {
+		String sql = "insert into products(product_name, price, stock_quantity) values(?,?,?)";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, product.getProductname());
+			pstmt.setString(2, user.getPasswordHash());
+			pstmt.setString(3, user.getSalt());
+			pstmt.setString(4, user.getEmail());
+			pstmt.setBoolean(5, user.getActive());
+			pstmt.setString(6, user.getRole());
+			
+			int rowcount = pstmt.executeUpdate();
+			
+			if(rowcount != 1) {
+				throw new RuntimeException("新增失敗! ");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateProduct(Integer productId, String productname) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(Integer productId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,10 @@
+package javaweb.filter;
+
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServlet;
+
+
+@WebFilter(urlPatterns = {""})
+public class LoginFilter extends HttpServlet{
+
+}

@@ -1,0 +1,9 @@
+package javaweb.model.dto;
+
+// 使用者憑證，登入後會取得的資料
+
+public class UserCert {
+	private Integer userId; // 使用者ID
+	private String username; // 使用者名稱
+
+}

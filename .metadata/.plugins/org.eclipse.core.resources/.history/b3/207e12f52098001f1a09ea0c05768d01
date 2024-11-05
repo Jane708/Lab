@@ -1,0 +1,45 @@
+package javaweb.repository;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javaweb.model.entity.Order;
+
+public class OrderDaoImpl extends BaseDao implements OrderDao{
+
+	@Override
+	public List<Order> findAllOrders(Integer userId, String orderStatus) {
+		List<Order> orders = new ArrayList<>();
+		String sql = """
+						select user_id, order_date, product_id, quantity, 
+						unit_price, subtotal, order_status 
+						from orders
+						where user_id = ? and orderStatus = ?
+					""".trim();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, userId);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
+	@Override
+	public void batchAddOrders(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdateOrderStatus(List<Integer> orderIds, String orderStatus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

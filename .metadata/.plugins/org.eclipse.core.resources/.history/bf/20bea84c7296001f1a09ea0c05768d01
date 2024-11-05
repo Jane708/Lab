@@ -1,0 +1,12 @@
+package javaweb.service;
+
+
+// 憑證服務
+public class CertService {
+	
+	// 登入成功後，可以取得憑證
+	public UserCert getCert() {
+		
+	}
+
+}

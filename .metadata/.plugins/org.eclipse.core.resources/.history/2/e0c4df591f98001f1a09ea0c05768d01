@@ -1,0 +1,6 @@
+package javaweb.repository;
+
+public interface OrderDao {
+	public List<Order> findAllOrderByUserId;
+
+}

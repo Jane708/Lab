@@ -1,0 +1,43 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.dto.ShowDto;
+import service.ShowService;
+
+/*
+ * 查詢全部: Get   /show, /shows
+ * 新增單筆: POST  /show/add
+ * 查詢單筆: GET   /show/get?showname=lovestory
+ * 修改單筆: POST  /show/update?showId=1
+ * 刪除單筆: GET   /show/delete?showId=1
+ */
+
+@WebServlet(urlPatterns = {"//show/*", "/shows"})
+public class ShowServlet extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pathInfo = req.getPathInfo();
+		
+		// 查詢全部
+		if(pathInfo == null || pathInfo.equals("/*")) {
+			// 查詢全部
+			List<ShowDto> showDtos = showService.findAll();
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
+	}
+	
+
+}

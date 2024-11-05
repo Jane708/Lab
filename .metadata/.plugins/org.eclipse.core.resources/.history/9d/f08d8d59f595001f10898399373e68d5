@@ -1,0 +1,12 @@
+package model.entity;
+
+import java.sql.Date;
+
+public class Show {
+	private Integer show_id;
+	private String showname;
+	private Date showtime;
+	private Integer limitpeople;
+	private String showintro;
+
+}

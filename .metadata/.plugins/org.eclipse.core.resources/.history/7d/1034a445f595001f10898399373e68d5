@@ -1,0 +1,11 @@
+package model.entity;
+
+public class Show {
+	//show_id, showname, showtime, limitpeople, showintro
+	private Integer show_id;
+	private
+	private
+	private
+	private
+
+}

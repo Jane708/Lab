@@ -1,0 +1,9 @@
+package exception;
+
+public class PasswordInValidException extends CerException{
+
+	public PasswordInValidException(String message) {
+		super(message);
+	}
+
+}
