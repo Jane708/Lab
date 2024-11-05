@@ -89,6 +89,7 @@
 						<th>角色(權限)</th>
 						<th>修改</th>
 						<th>刪除</th>
+						<th>無</th>
 					</tr>
 				</thead>
 				<c:forEach var="userDto" items="${ userDtos }">
