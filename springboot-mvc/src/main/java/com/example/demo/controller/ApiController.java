@@ -1,12 +1,21 @@
 package com.example.demo.controller;
 
+import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.response.ApiResponse;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -77,11 +86,56 @@ public class ApiController {
 	 * 計算出平均年齡
 	 */
 	
-	@GetMapping("/age")
-	public String getAverageOfAge(@RequestParam("age") List<Integer> ages) {
-		double avgOfAge = ages.stream().mapToInt(Integer::intValue).average().getAsDouble();
-		return String.format("平均年齡: %.1f", avgOfAge);
-	}
+	//@GetMapping("/age")
+		@GetMapping(value = "/age", produces = "application/json;charset=utf-8")
+		public ResponseEntity<ApiResponse<Object>> getAverageOfAge(@RequestParam("age") List<String> ages) {
+			// 驗證 score 是否可以轉為有效整數
+			try {
+				double avgOfAge = ages.stream().mapToInt(Integer::parseInt).average().getAsDouble();
+				Object data = Map.of("平均年齡", String.format("%.1f", avgOfAge));
+				//return ResponseEntity.status(200).body(ApiResponse.success("查詢成功", data));
+				return ResponseEntity.ok(ApiResponse.success("查詢成功", data));
+			} catch (Exception e) {
+				
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+									 .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), "參數不正確"));
+			}
+		}
 	
+	/*
+	 * 6. Lab 練習: 得到多筆 score 資料
+	 * 路徑: "/exam?score=80&score=100&score=50&score=70&score=30"
+	 * 網址: http://localhost:8080/api/exam?score=80&score=100&score=50&score=70&score=30
+	 * 請自行設計一個方法，此方法可以
+	 * 印出: 最高分=?、最低分=?、平均=?、總分=?、及格分數列出=?、不及格分數列出=?
+	 * (支援中文字印出) 
+	 * 提示: IntSummaryStatistics, Collectors.partitioningBy
+	 * */
+	
+	@GetMapping(value = "/exam", produces = "application/json;charset=utf-8")
+	public ResponseEntity<ApiResponse<Object>> getExamInfo(@RequestParam("score") List<String> scores) {
+		try{
+			// 統計資料
+			IntSummaryStatistics stat = scores.stream().mapToInt(Integer::parseInt).summaryStatistics();
+			// 利用 Collectors.partitioningBy 分組
+			// key=true 及格分數, key=false 不及格分數
+			Map<Boolean, List<String>> resultMap = scores.stream()
+														  .collect(Collectors.partitioningBy(score -> Integer.parseInt(score) >= 60)); 
+			
+			Object data = Map.of(
+					"最高分", stat.getMax(), 
+					"最低分", stat.getMin(),
+					"平均", stat.getAverage(),
+					"總分", stat.getSum(),
+					"及格分數", resultMap.get(true),
+					"不及格分數", resultMap.get(false)
+					);
+			
+			return ResponseEntity.ok(ApiResponse.success("查詢成功", data));
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					 .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), "參數不正確"));
+		}
+	}
 	
 }
